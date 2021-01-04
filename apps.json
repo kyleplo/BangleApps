@@ -452,7 +452,7 @@
   { "id": "schedule",
     "name": "Schedule",
     "shortName":"Schedule",
-    "icon": "app.png",
+    "icon": "app-48.png",
     "version":"0.1",
     "description": "A simple configuarable schedule, shows time until weekly recuring events.",
     "tags": "schedule,time,event,configurable",
