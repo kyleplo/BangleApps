@@ -74,12 +74,10 @@
         `;
         tr.children[2].firstChild.addEventListener("click", function() {
           setDefaults();
-          changed();
           refresh();
         });
-        tr.children[4].firstChild.addEventListener("click", function() {
+        tr.children[3].firstChild.addEventListener("click", function() {
           options.push({"text":"",time:600,days:[1]});
-          changed();
           refresh();
         });
         tbody.appendChild(tr);
