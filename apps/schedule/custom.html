@@ -22,6 +22,7 @@
         </tbody>
       </table>
     </div>
+    <p><button id="upload">Upload</button></p>
     <script src="../../core/lib/customize.js"></script>
     <script>
     var options;
@@ -30,6 +31,7 @@
         {text:"Example Event",time:600,days:[0,1]}
       ];
     }
+    setDefaults();
     
     function refresh() {
       var tbody = document.getElementById("tbody");
