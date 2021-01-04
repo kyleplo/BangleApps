@@ -45,7 +45,7 @@
         var titleInput = tr.children[0].firstChild;
         titleInput.value = option.text;
         titleInput.addEventListener("change", function(e) {
-          option.text; = titleInput.value;
+          option.text = titleInput.value;
         });
         var timeInput = tr.children[1].firstChild;
         timeInput.value = Math.floor(option.time / 60) + ":" + Math.floor(option.time % 60);
