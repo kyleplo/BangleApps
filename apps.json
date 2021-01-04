@@ -449,6 +449,19 @@
       {"name": "weather.json"}
     ]
   },
+  { "id": "schedule",
+    "name": "Schedule",
+    "shortName":"Schedule",
+    "icon": "app.png",
+    "version":"0.1",
+    "description": "A simple configuarable schedule, shows time until weekly recuring events.",
+    "tags": "schedule,time,event,configurable",
+    "custom": "custom.html",
+    "storage": [
+      {"name":"schedule.app.js"},
+      {"name":"schedule.img","url":"app-icon.js","evaluate":true}
+    ]
+  },
   { "id": "chargeanim",
     "name": "Charge Animation",
     "icon": "icon.png",
