@@ -22,7 +22,8 @@
         </tbody>
       </table>
     </div>
-    <p><button id="upload">Upload</button></p>
+    <br>
+    <p><button id="upload" class="btn">Upload</button></p>
     <script src="../../core/lib/customize.js"></script>
     <script>
     var options;
@@ -50,7 +51,7 @@
           option.text = titleInput.value;
         });
         var timeInput = tr.children[1].firstChild;
-        timeInput.value = Math.floor(option.time / 60) + ":" + Math.floor(option.time % 60);
+        timeInput.value = (Math.floor(option.time / 60).toString().length === 1 ? "0" + Math.floor(option.time / 60) : Math.floor(option.time / 60)) + ":" + Math.floor(option.time % 60);
         timeInput.addEventListener("change", function(e) {
           option.time = (parseFloat(timeInput.value.split(":")[0]) * 60) + parseFloat((timeInput.value.split(":")[1]));
         });
