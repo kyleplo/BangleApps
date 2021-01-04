@@ -41,7 +41,7 @@
         tr.innerHTML = `
           <td><input type="text" name="title"></td>
           <td><input type="time" name="time"></td>
-          <td><input type="text" name="days"></span></td>
+          <td><input type="text" name="days"></td>
           <td><button class="btn btn-action"><i class="icon icon-delete"></i></button></td>
         `;
         var titleInput = tr.children[0].firstChild;
@@ -54,7 +54,7 @@
         timeInput.addEventListener("change", function(e) {
           option.time = (parseFloat(timeInput.value.split(":")[0]) * 60) + parseFloat((timeInput.value.split(":")[1]));
         });
-        var daysInput = tr.children[2].firstChild.firstChild;
+        var daysInput = tr.children[2].firstChild;
         daysInput.value = option.days.join(",");
         daysInput.addEventListener("change", function(e) {
           option.days = daysInput.split(",");
@@ -70,7 +70,6 @@
           <td></td>
           <td></td>
           <td><button class="btn">Reset to Defaults</button></td>
-          <td></td>
           <td><button class="btn btn-action"><i class="icon icon-plus"></i></button></td>
         `;
         tr.children[2].firstChild.addEventListener("click", function() {
