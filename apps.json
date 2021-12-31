@@ -5068,7 +5068,7 @@
     "version":"0.01",
     "description": "Widget for Bangle.js 2 that completely clears the screen when locked. May save battery life.",
     "icon": "widget.png",  
-    "type": "widget",
+    "type": "app",
     "tags": "widget",
     "supports" : ["BANGLEJS2"],
     "readme": "README.md",
