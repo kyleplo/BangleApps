@@ -862,7 +862,6 @@
     "data": [{"name":"weather.json"}]
   },
   {
-    "id": "chargeanim",
     "name": "Charge Animation",
     "version": "0.02",
     "description": "When charging, show a sideways charging animation and keep the screen on. When removed from the charger load the clock again.",

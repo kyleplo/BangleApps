@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../css/spectre.min.css">
+    <link rel="stylesheet" href="../../css/spectre-exp.min.css">
+    <link rel="stylesheet" href="../../css/spectre-icons.min.css">
+  </head>
+  <body>
+    <p>Choose events to display:</p>
+    <p>Days should be a comma-seperated list of days of the week, starting at 0 as Sunday.</p>
+    <div style="overflow-x:scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Time</th>
+            <th>Day(s)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <p><button id="upload" class="btn">Upload</button></p>
+    <script src="../../core/lib/customize.js"></script>
+    <script>
+    var options;
+    function setDefaults() {
+      options = [
+        {text:"Example Event",time:600,days:[0,1]}
+      ];
+    }
+    setDefaults();
+    
+    function refresh() {
+      var tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
+      options.forEach((option,idx)=>{
+        var tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input type="text" name="title"></td>
+          <td><input type="time" name="time"></td>
+          <td><input type="text" name="days"></td>
+          <td><button class="btn btn-action"><i class="icon icon-delete"></i></button></td>
+        `;
+        var titleInput = tr.children[0].firstChild;
+        titleInput.value = option.text;
+        titleInput.addEventListener("change", function(e) {
+          option.text = titleInput.value;
+        });
+        var timeInput = tr.children[1].firstChild;
+        timeInput.value = (Math.floor(option.time / 60).toString().length === 1 ? "0" + Math.floor(option.time / 60) : Math.floor(option.time / 60)) + ":" + (Math.floor(option.time % 60).toString().length === 1 ? "0" + Math.floor(option.time % 60) : Math.floor(option.time % 60));
+        timeInput.addEventListener("change", function(e) {
+          option.time = (parseFloat(timeInput.value.split(":")[0]) * 60) + parseFloat((timeInput.value.split(":")[1]));
+        });
+        var daysInput = tr.children[2].firstChild;
+        daysInput.value = option.days.join(",");
+        daysInput.addEventListener("change", function(e) {
+          option.days = daysInput.value.split(",");
+        });
+        tr.children[3].firstChild.addEventListener("click", function() {
+          options.splice(idx,1);
+          refresh();
+        });
+        tbody.appendChild(tr);
+      });
+        var tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td></td>
+          <td></td>
+          <td><button class="btn">Reset to Defaults</button></td>
+          <td><button class="btn btn-action"><i class="icon icon-plus"></i></button></td>
+        `;
+        tr.children[2].firstChild.addEventListener("click", function() {
+          setDefaults();
+          refresh();
+        });
+        tr.children[3].firstChild.addEventListener("click", function() {
+          options.push({"text":"",time:600,days:[1]});
+          refresh();
+        });
+        tbody.appendChild(tr);
+    }
+    
+    window.addEventListener("load", refresh)
+    
+    document.getElementById("upload").addEventListener("click", function() {
+        var app = `const schedule = ` + JSON.stringify(options) + `;
+function calculateTime(){
+  var d = new Date();
+  return Math.floor(((d.getTime() - (d.getTimezoneOffset() * 60000)) % (1000 * 60 * 60 * 24)) / 60000);
+}
+
+function findItems(){
+  var d = new Date().getDay();
+  var r = [];
+  for(var i = 0;i < schedule.length;i++){
+    if(schedule[i].days.includes(d)){
+      r.push(schedule[i]);
+    }
+  }
+  delete d;
+  return r;
+}
+
+function toHoursIfNeeded(m){
+  if(m > 59){
+    return Math.floor(m / 60) + " hours";
+  }else if(m == 1){
+    return "1 minute";
+  }else{
+    return m + " minutes";
+  }
+}
+
+function findItem(items){
+  var lowest = null;
+  var lowValue = 1500;
+  for(var i = 0;i < items.length;i++){
+    if(items[i].time > calculateTime() && items[i].time < lowValue){
+      lowest = items[i];
+      lowValue = lowest.time;
+    }
+  }
+  delete lowValue;
+  return lowest;
+}
+
+function tick(){
+  g.clear();
+  g.reset();
+  var e = findItem(findItems());
+  g.setFont("6x8",3);
+  g.setFontAlign(0,0);
+  g.drawString("Schedule", g.getWidth()/2, 40);
+  g.setFont("6x8",2);
+  if(e){
+    g.drawString(e.text, g.getWidth()/2, g.getHeight()/2);
+    g.drawString("in " + toHoursIfNeeded(e.time - calculateTime()), g.getWidth()/2, (g.getHeight()/2) + 20);
+  }else{
+    g.drawString("No events", g.getWidth()/2, g.getHeight()/2);
+  }
+  Bangle.loadWidgets();
+  Bangle.drawWidgets();
+  delete e;
+}
+var interval = setInterval(tick, 10000);
+Bangle.on('lcdPower',on=>{
+  if (interval){
+    clearInterval(interval);
+  }
+  interval = undefined;
+  if (on) {
+    interval = setInterval(tick, 10000);
+    tick(); // draw immediately
+  }
+});
+tick();
+
+setWatch(Bangle.showLauncher, BTN2, { repeat: false, edge: "falling" });`;
+        sendCustomizedApp({
+          storage:[
+            {name:"schedule.app.js", url:"app.js", content:app},
+          ]
+        });
+      });
+    </script>
+  </body>
+</html>
