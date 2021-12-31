@@ -23,6 +23,7 @@
   }
   var mainmenu = {
     "" : { "title" : "Gadgetbridge" },
+    "< Back" : back,
     "Connected" : { value : NRF.getSecurityStatus().connected?"Yes":"No" },
     "Show Icon" : {
       value: settings().showIcon,
@@ -31,11 +32,10 @@
     },
     "Find Phone" : function() { E.showMenu(findPhone); },
     "Record HRM" : {
-      value: settings().hrm,
+      value: !!settings().hrm,
       format: v => v?"Yes":"No",
       onchange: v => updateSetting('hrm', v)
-    },
-    "< Back" : back,
+    }    
   };
 
   var findPhone = {
