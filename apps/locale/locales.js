@@ -140,6 +140,7 @@ var locales = {
   },
   "de_DE": {
     lang: "de_DE",
+    icon: "&#9973;&#9992;&#65039;",
     decimal_point: ",",
     thousands_sep: ".",
     currency_symbol: "€",
@@ -665,6 +666,7 @@ var locales = {
   },
   "la_LA": {
     lang: "la_LA",
+    icon: "&#10013;",
     currency_symbol: "€",
     int_curr_symbol: "EUR",
     speed: "kmh",
