@@ -94,13 +94,10 @@ exports = { name : "en_GB", currencySym:"£",
         var localeParts = l.split("_"); // en_GB -> ["en","GB"]
         var icon = "";
         // If we have a 2 char ISO country code, use it to get the unicode flag
-        // Latin does not have a country code, Latin cross emoji is used instead
-        if (localeParts[1]=="LA")
-          icon = "&#10013; ";
+        if (l.icon)
+          icon = l.icon + " ";
         else if (localeParts[1] && localeParts[1].length==2)
           icon = localeParts[1].toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0)+127397) )+" ";
-        if (localeParts[1]=="NAV")
-          icon = "&#9973;&#9992;&#65039; ";
         return `<option value="${l}">${icon}${l}</option>`
       }).join("\n");
 
