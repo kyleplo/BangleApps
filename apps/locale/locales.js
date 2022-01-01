@@ -663,6 +663,23 @@ var locales = {
     day: "Pirmdiena,Otrdiena,Trešdiena,Ceturtdiena,Piektdiena,Sestdiena,Svētdiena",
     trans: { yes: "jā", Yes: "Jā", no: "nē", No: "Nē", ok: "labi", on: "Ieslēgt", off: "Izslēgt", "< Back": "< Atpakaļ" }
   },
+  "la_LA": {
+    lang: "la_LA",
+    currency_symbol: "€",
+    int_curr_symbol: "EUR",
+    speed: "kmh",
+    distance: { 0: "m", 1: "km" },
+    temperature: "°C",
+    ampm: { 0: "", 1: "" },
+    timePattern: { 0: "%HH:%MM:%SS", 1: "%HH:%MM" },
+    datePattern: { 0: "%d %B %Y", "1": "%d %b %y" },
+    abmonth: "Ian,Feb,Mar,Apr,Mai,Lun,Iul,Aug,Sep,Oct,Nov,Dec",
+    month: "Ianuarii,Februarii,Martii,Aprilis,Maii,Lunii,Iulio,Augusto,Septembris,Octobris,Novembris,Decembris",
+    abday: "Lu,Ma,Me,Jo,Ve,Sa,Do",
+    day: "Lunae,Martis,Mercurii,Jovis,Veneris,Saturni,Dominica",
+    trans: { yes: "ita", Yes: "Ita", no: "minime", No: "Minime", ok: "bene", on: "verum", off: "falsum", 
+			"< Back": "< Revertere", "Delete": "Delere" }
+  },
 /*,
   "he_IL": { // This won't work until we get a font - see https://github.com/espruino/BangleApps/issues/399
     codePage : "ISO8859-8",
